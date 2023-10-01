@@ -1,1 +1,1 @@
-# Topic for DBMS Mini Project competition
+# ScanEat - Order Simplified  
