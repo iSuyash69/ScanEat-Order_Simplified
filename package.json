@@ -1,0 +1,31 @@
+{
+  "name": "scaneat---order-simplified",
+  "version": "1.0.0",
+  "description": "DBMS mini project competition ",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iSuyash69/ScanEat-Order_Simplified.git"
+  },
+  "author": "Suyash Deshpande",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iSuyash69/ScanEat-Order_Simplified/issues"
+  },
+  "homepage": "https://github.com/iSuyash69/ScanEat-Order_Simplified#readme",
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "axios": "^1.5.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0"
+  }
+}
