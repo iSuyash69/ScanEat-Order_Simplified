@@ -8,8 +8,9 @@ import FoodItemsSection from "./FoodItemsSection/FoodItemsSection";
 
 const LandingPage=()=>{
 
-    const [foodItems,setFoodItems]=useState([]);
+
     const [offersList,setOffersList]=useState([]);
+    const [foodItems,setFoodItems]=useState([]);
     useEffect(()=>{fetchData();},[]);
 
     const fetchData=()=>{
@@ -20,20 +21,20 @@ const LandingPage=()=>{
             setOffersList(response.data.data.cards[0].card.card.imageGridCards.info);
         })
         .catch(()=>{
-            console.log("get request failed");
+            console.log("offers Get request failed");
         });
 
-        axios.get("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.9974533&lng=73.78980229999999&restaurantId="+65797+"&catalog_qa=undefined&submitAction=ENTER")
+        axios.get("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.9974533&lng=73.78980229999999&restaurantId="+5934+"&catalog_qa=undefined&submitAction=ENTER")
         .then((response)=>{
             console.log(response.data);
             setFoodItems(response.data.data.cards);
         })
         .catch(()=>{
-            console.log("Get request failed");
+            console.log("foodItems Get request failed");
         });
     }
 
-    if(offersList.length==0){
+    if(offersList.length==0 && foodItems.length==0){
         return <LandingPageShimmerUI/>
     }
 
