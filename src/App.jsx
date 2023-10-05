@@ -1,14 +1,19 @@
-import ReactDOM  from "react-dom/client";
+import ReactDOM  from "react-dom";
 import LandingPage from "./components/LandingPage/LandingPage";
 import NavBar from "./components/LandingPage/Header/NavBar/NavBar";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import ErrorPage from "./components/ErrorPage/ErrorPage";
+import { Provider } from "react-redux";
+import reduxStore from "./components/utils/ReduxStore/reduxStore";
 
 const AppLayout=()=>{
     return(
-        <div>
-            <NavBar/>
-            <Outlet/>
-        </div>
+        <Provider store={reduxStore}>
+            <div>
+                <NavBar/>
+                <Outlet/>
+            </div>
+        </Provider>
     );
 }
 
@@ -22,7 +27,7 @@ const appRouter=createBrowserRouter([
                 element:<LandingPage/>
             },
         ],
-        errorElement:<Error/>
+        errorElement:<ErrorPage/>
     }
 ]);
 
