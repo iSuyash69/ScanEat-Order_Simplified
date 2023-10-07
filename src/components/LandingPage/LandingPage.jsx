@@ -5,9 +5,9 @@ import OffersSection from "./OffersSection/OffersSection";
 import LandingPageShimmerUI from "./LandingPageShimmerUI";
 import "./LandingPage.css";
 import FoodItemsSection from "./FoodItemsSection/FoodItemsSection";
+import FoodTypeCardSection from "./FoodTypeCardSection/FoodTypeCardSection";
 
 const LandingPage=()=>{
-
 
     const [offersList,setOffersList]=useState([]);
     const [foodItems,setFoodItems]=useState([]);
@@ -32,6 +32,7 @@ const LandingPage=()=>{
         .catch(()=>{
             console.log("foodItems Get request failed");
         });
+
     }
 
     if(offersList.length==0 || foodItems.length==0){
@@ -42,6 +43,7 @@ const LandingPage=()=>{
         <div className="landingPage-container">
             <Header/>
             <OffersSection offersList={offersList}/>
+            <FoodTypeCardSection/>
             <FoodItemsSection foodItems={foodItems}/>
         </div>
     );
