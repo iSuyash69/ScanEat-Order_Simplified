@@ -1,5 +1,6 @@
 import {useSelector } from "react-redux";
 import "./CartPopUp.css";
+import { Link } from "react-router-dom";
 
 const CartPopUp=()=>{
 
@@ -17,10 +18,11 @@ const CartPopUp=()=>{
             <h4>{cartItems.length} items |</h4>
             <h4>₹{totalCost}</h4>
         </div>
-        <div className="added-items-pop-up-div2">
-        <h4>View Cart</h4>
-        <i class="fa-solid fa-cart-shopping"></i>
-        </div>
+        <Link style={{textDecoration:"none",color:"white"}} to={"/cart"}><div className="added-items-pop-up-div2">
+            <h4>View Cart</h4>
+            <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+        </Link>
     </div>
     );
 }

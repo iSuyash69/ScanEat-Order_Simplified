@@ -5,6 +5,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import { Provider } from "react-redux";
 import reduxStore from "./components/utils/ReduxStore/reduxStore";
+import CartPage from "./components/CartPage/CartPage";
 
 const AppLayout=()=>{
     return(
@@ -27,8 +28,8 @@ const appRouter=createBrowserRouter([
                 element:<LandingPage/>
             },
             {
-                path:"/home",
-                element:<ErrorPage/>
+                path:"/cart",
+                element:<CartPage/>
             }
         ],
         errorElement:<ErrorPage/>
