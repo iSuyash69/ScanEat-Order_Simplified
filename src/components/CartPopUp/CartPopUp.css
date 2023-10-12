@@ -9,7 +9,7 @@
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
     color: white;
-    animation: slide-up 0.5s forwards; 
+    animation: slide-up 0.5s forwards;
 }
 @keyframes slide-up {
     from {

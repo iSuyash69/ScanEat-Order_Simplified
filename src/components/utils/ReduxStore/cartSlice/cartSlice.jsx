@@ -1,36 +1,45 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
-const calculateTotalCost=(cost)=>{
-    const totalCost=cost.reduce((acc,currentCost)=>acc+currentCost,0);
-    return totalCost;
+const calculateTotalCost = (items) => {
+  return items.reduce((acc, item) => acc + item.quantity * item.price, 0);
 }
 
-const cartSlice=createSlice({
-    name:'cart',
-    initialState:{
-        items:[],
-        cost:[],
-        totalCost:0,
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState: {
+    items: [],
+    totalCost: 0,
+  },
+  reducers: {
+    addItem: (state, action) => {
+      const existingItem = state.items.find((item) => item.item_id === action.payload.item_id);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        state.items.push({ ...action.payload, added: true, quantity: 1 });
+      }
+      state.totalCost = calculateTotalCost(state.items);
     },
-    reducers:{
-        addItem:(state,action)=>{
-            state.items.push(action.payload);
-        },
-        removeItem:(state)=>{
-            state.items.pop();
-            state.cost.pop();
-            state.totalCost = calculateTotalCost(state.cost);
-        },
-        emptyCart:(state)=>{
-            state.items.length=0;
-        },
-        addCost:(state,action)=>{
-            state.cost.push(action.payload);
-            state.totalCost=calculateTotalCost(state.cost)
-        },
-    }
+    removeItem: (state, action) => {
+      const existingItem = state.items.find((item) => item.item_id === action.payload.item_id);
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          existingItem.quantity--;
+        } else {
+          const indexToRemove = state.items.findIndex((item) => item.item_id === action.payload.item_id);
+          if (indexToRemove !== -1) {
+            state.items.splice(indexToRemove, 1);
+          }
+        }
+        state.totalCost = calculateTotalCost(state.items);
+      }
+    },
+    emptyCart: (state) => {
+        state.items=[];
+        state.totalCost=0;
+    },
+  },
 });
 
-export const {addItem,removeItem,emptyCart,addCost}=cartSlice.actions;
+export const { addItem, removeItem, emptyCart } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -22,7 +22,7 @@ const MenuPopUpModal=({openMenuPopUp,setOpenMenuPopUp})=>{
     }
 
     const navigateHome=()=>{
-        navigate("/adasgds");
+        navigate("/home");
     }
 
     return ReactDOM.createPortal(

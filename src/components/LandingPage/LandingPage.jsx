@@ -6,6 +6,7 @@ import LandingPageShimmerUI from "./LandingPageShimmerUI";
 import "./LandingPage.css";
 import FoodItemsSection from "./FoodItemsSection/FoodItemsSection";
 import FoodTypeCardSection from "./FoodTypeCardSection/FoodTypeCardSection";
+import mockData from '/src/mockData.json';
 
 const LandingPage=()=>{
 
@@ -24,17 +25,21 @@ const LandingPage=()=>{
             console.log("offers Get request failed");
         });
 
-        axios.get("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.9974533&lng=73.78980229999999&restaurantId="+5934+"&catalog_qa=undefined&submitAction=ENTER")
-        .then((response)=>{
-            console.log(response.data);
-            setFoodItems(response.data.data.cards);
-        })
-        .catch(()=>{
-            console.log("foodItems Get request failed");
-        });
-
+        // axios.get("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.9974533&lng=73.78980229999999&restaurantId="+5934+"&catalog_qa=undefined&submitAction=ENTER")
+        // axios.get("C:\Users\ACER\Downloads\obj.json")
+        // .then((response)=>{
+        //     console.log(response.data);
+        //     // setFoodItems(response.data.data.cards);
+        // })
+        // .catch(()=>{
+        //     console.log("foodItems Get request failed");
+        // });
+        setFoodItems(mockData);
     }
 
+    console.log(foodItems);
+    console.log(offersList);
+    
     if(offersList.length==0 || foodItems.length==0){
         return <LandingPageShimmerUI/>
     }

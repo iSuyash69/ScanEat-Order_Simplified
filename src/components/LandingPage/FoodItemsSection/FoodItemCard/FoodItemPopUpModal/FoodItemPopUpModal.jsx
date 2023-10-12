@@ -1,9 +1,12 @@
 import { useEffect } from "react";
 import  ReactDOM from "react-dom"; 
 import "./FoodItemPopUpModal.css";
+import { useDispatch } from "react-redux";
+import { addItem,removeItem } from "../../../../utils/ReduxStore/cartSlice/cartSlice";
 
-const FoodItemPopUpModal=({card,foodItemPopUp,setFoodItemPopUp,addItem,handleClick})=>{
+const FoodItemPopUpModal=({card,foodItemPopUp,setFoodItemPopUp,quantity,handleClick})=>{
 
+    const dispatch = useDispatch();
     useEffect(()=>{overFlow();},[foodItemPopUp]);
     const overFlow=()=>{
         if(foodItemPopUp==true){
@@ -16,7 +19,6 @@ const FoodItemPopUpModal=({card,foodItemPopUp,setFoodItemPopUp,addItem,handleCli
     
     const handleClickEvent=()=>{
         handleClick();
-        setFoodItemPopUp(false);
     }
 
     if(!foodItemPopUp){
@@ -29,22 +31,31 @@ const FoodItemPopUpModal=({card,foodItemPopUp,setFoodItemPopUp,addItem,handleCli
             <div className="food-item-popup-modal-main-container">
                 <div className="food-item-popup-modal-sub-container1">
                     <i className="fa-solid fa-x close-pop-up" onClick={()=>{setFoodItemPopUp(false)}}></i>
-                    <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_850,h_504/"+card.card.info.imageId} alt="not loaded"></img>
+                    <img src={card.src} alt="not loaded"></img>
                 </div>
                 <div className="food-item-popup-modal-sub-container2">
                     <div>
-                        {(card.card.info.isVeg==1)?(
+                        {(card.Vegonly)?(
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/180px-Veg_symbol.svg.png?20131205102827"></img>
                             ):(
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/180px-Non_veg_symbol.svg.png?20131205102929"></img>
                             )}
-                        <h3>{card.card.info.name}</h3>
-                        <p>₹{card.card.info.price/100}</p>
+                        <h3>{card.name}</h3>
+                        <p>₹{card.price}</p>
                     </div>
-                    <button onClick={handleClickEvent}>{addItem}</button>
+                    <button onClick={()=>handleClickEvent(card)}>{quantity>0 ?(
+                    <p className="quantity" onClick={(e)=>{e.stopPropagation();}}>
+                    <span onClick={() => {dispatch(removeItem(card)); }}>- </span>
+                    <span onClick={(e)=>{e.stopPropagation();}}>{quantity}</span>
+                    <span onClick={() => {dispatch(addItem(card)); }}> +</span>
+                    </p>
+                ):(
+                'ADD'
+                )}
+                </button>
                 </div>
                 <div className="food-item-popup-modal-sub-container3">
-                    <h4>{card.card.info.description}</h4>
+                    <h4>{card.description}</h4>
                 </div>
             </div>
             </div>,

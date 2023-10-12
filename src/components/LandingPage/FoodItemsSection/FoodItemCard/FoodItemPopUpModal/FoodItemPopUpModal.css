@@ -107,5 +107,13 @@
     color:gray;
     font-size: 14px;
 }
+.food-item-popup-modal-sub-container2 .quantity{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
     
 
