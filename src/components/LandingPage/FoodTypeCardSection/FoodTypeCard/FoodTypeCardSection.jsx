@@ -1,4 +1,5 @@
-import "../FoodTypeCardSection.css"
+import { Link } from "react-router-dom";
+import "../FoodTypeCardSection.css";
 
 const FoodTypeCard=()=>{
 
@@ -6,16 +7,14 @@ const FoodTypeCard=()=>{
 
     return(
         <div className="food-type-card">
-            <img src={link+"PC_Creative%20refresh/3D_bau/banners_new/Pizza.png"}alt="img1"/>
-            <img src={link+"v1675667625/PC_Creative%20refresh/North_Indian_4.png"}alt="img2"/>
-            <img src={link+"v1674029851/PC_Creative%20refresh/3D_bau/banners_new/Ice_Creams.png"}alt="img3"/>
-            <img src={link+"v1674029848/PC_Creative%20refresh/3D_bau/banners_new/Chinese.png"}alt="img4"/>
-            <img src={link+"v1675667625/PC_Creative%20refresh/Biryani_2.png"}alt="img5"/>
-            <img src={link+"v1674029845/PC_Creative%20refresh/3D_bau/banners_new/Burger.png"}alt="img6"/>
-            <img src={link+"v1674029852/PC_Creative%20refresh/3D_bau/banners_new/Momos.png"}alt="img7"/>
-            <img src={link+"v1674029855/PC_Creative%20refresh/3D_bau/banners_new/Noodles.png"}alt="img8"/>
-            <img src={link+"v1674029854/PC_Creative%20refresh/3D_bau/banners_new/Pav_Bhaji.png"}alt="img9"/>
-            <img src={link+"v1675667626/PC_Creative%20refresh/South_Indian_4.png"}alt="img10"/>
+            <Link to={"/subCategory/chinesse"}><img src={link+"PC_Creative%20refresh/3D_bau/banners_new/Pizza.png"} alt="img1"/></Link>
+            <Link to={"/subCategory/rice"}><img src={link+"v1675667625/PC_Creative%20refresh/North_Indian_4.png"} alt="img2"/></Link>
+            <Link to={"/subCategory/TIkka"}><img src={link+"PC_Creative%20refresh/3D_bau/banners_new/Pizza.png"} alt="img3"/></Link>
+            <Link to={"/subCategory/chicken"}><img src={link+"PC_Creative%20refresh/3D_bau/banners_new/Pizza.png"} alt="img4"/></Link>
+            <Link to={"/subCategory/soup"}><img src={link+"PC_Creative%20refresh/3D_bau/banners_new/Pizza.png"} alt="img5"/></Link>
+            <Link to={"/subCategory/Curry"}><img src={link+"PC_Creative%20refresh/North_Indian_4.png"} alt="img6"/></Link>
+            <Link to={"/subCategory/Sandwich"}><img src={link+"PC_Creative%20refresh/3D_bau/banners_new/Pizza.png"} alt="img7"/></Link>
+            <Link to={"/subCategory/Dessert"}><img src={link+"PC_Creative%20refresh/3D_bau/banners_new/Pizza.png"} alt="img8"/></Link>
         </div>
     );
 }

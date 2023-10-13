@@ -6,6 +6,7 @@ import ErrorPage from "./components/ErrorPage/ErrorPage";
 import { Provider } from "react-redux";
 import reduxStore from "./components/utils/ReduxStore/reduxStore";
 import CartPage from "./components/CartPage/CartPage";
+import SubCategoryPage from "./components/SubCategoryPage/SubCategoryPage";
 
 const AppLayout=()=>{
     return(
@@ -30,6 +31,10 @@ const appRouter=createBrowserRouter([
             {
                 path:"/cart",
                 element:<CartPage/>
+            },
+            {
+                path:"/subCategory/:subCategoryName",
+                element:<SubCategoryPage/>
             }
         ],
         errorElement:<ErrorPage/>

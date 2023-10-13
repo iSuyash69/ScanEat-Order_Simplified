@@ -17,13 +17,16 @@
     padding: 10px;
     justify-content: center;
     color: white;
-    background-color:#fc8019;
+    background-color:#E6E7E9;
     align-items: center;
+}
+.cart-page-title h3{
+    font-weight: 500;
+    color: gray;
 }
 .cart-page-title i{
     /* margin-left: 5px */
     color: black;
-
 }
 .cart-page-title div{
     display: flex;
@@ -44,7 +47,7 @@
 }
 .cart-item-card{
     align-self: center;
-    min-height: 159px;
+    min-height: 142px;
     width: 100%;
     justify-content: space-around;
     gap: 10px;

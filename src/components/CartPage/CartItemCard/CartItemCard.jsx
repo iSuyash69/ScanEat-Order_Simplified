@@ -25,8 +25,8 @@ const CartItemCard=({card})=>{
     return(
         <div className="menu-card cart-item-card">
             <div id="two">
-                <img onClick={()=>{setFoodItemPopUp(true)}} src={card.src} alt="not loaded"></img>
-                <button onClick={()=>handleClick(card)}>{quantity>0 ?(
+                <img style={{width:'107px',height:'85px'}} onClick={()=>{setFoodItemPopUp(true)}} src={card.src} alt="not loaded"></img>
+                <button style={{width:'83px',marginTop:'73px'}} onClick={()=>handleClick(card)}>{quantity>0 ?(
                     <p className="quantity" onClick={(e)=>{e.stopPropagation();}}>
                     <span onClick={() => {dispatch(removeItem(card)); }}>- </span>
                     <span onClick={(e)=>{e.stopPropagation();}}>{quantity}</span>
@@ -37,15 +37,15 @@ const CartItemCard=({card})=>{
                 )}
                 </button>
             </div>
-            <div style={{marginTop:'17px'}} id="one" onClick={()=>{setFoodItemPopUp(true)}}>
+            <div style={{marginTop:'10px',position:'relative'}} id="one" onClick={()=>{setFoodItemPopUp(true)}}>
                 {(card.Vegonly)?(
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/180px-Veg_symbol.svg.png?20131205102827"></img>
                     ):(
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Non_veg_symbol.svg/180px-Non_veg_symbol.svg.png?20131205102929"></img>
                     )}
-                <h3 style={{fontSize:'15px'}}>{card.name}</h3>
-                <p>₹{card.price}</p>
-                <h3 style={{fontWeight:'500',marginTop:'3px',color:'green'}}>Total : {card.price*100/100} x {card.quantity} = <span style={{color:'green'}}> ₹ {card.price*card.quantity}</span></h3>
+                <h3 style={{fontSize:'15px',fontWeight:'500'}}>{card.name}</h3>
+                <p style={{fontSize:'13px',color:'gray'}}>₹{card.price}</p>
+                <h3 style={{fontWeight:'400',marginTop:'3px',color:'black',fontSize:'14px'}}>Total : {card.price*100/100} x {card.quantity} = <span style={{color:'#60b246',fontWeight:'500'}}> ₹{card.price*card.quantity}</span></h3>
             </div>
             <FoodItemPopUpModal card={card} foodItemPopUp={foodItemPopUp} setFoodItemPopUp={setFoodItemPopUp} quantity={quantity} handleClick={()=>handleClick(card)}/>
             <div className="cart-hr"></div>
