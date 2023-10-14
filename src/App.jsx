@@ -7,6 +7,10 @@ import { Provider } from "react-redux";
 import reduxStore from "./components/utils/ReduxStore/reduxStore";
 import CartPage from "./components/CartPage/CartPage";
 import SubCategoryPage from "./components/SubCategoryPage/SubCategoryPage";
+import { lazy } from "react";
+
+
+const ManagerPage=lazy(()=>import("./components/ManagerPage/ManagerPage.jsx"));
 
 const AppLayout=()=>{
     return(
@@ -35,6 +39,10 @@ const appRouter=createBrowserRouter([
             {
                 path:"/subCategory/:subCategoryName",
                 element:<SubCategoryPage/>
+            },
+            {
+                path:"/Manager",
+                element:<ManagerPage/>
             }
         ],
         errorElement:<ErrorPage/>

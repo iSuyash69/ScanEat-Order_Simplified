@@ -3,12 +3,17 @@ import { Link, useParams } from "react-router-dom";
 import subCategoryMockData from "/src/subCategoryMockData.json";
 import FoodItemCard from "../LandingPage/FoodItemsSection/FoodItemCard/FoodItemCard"
 import "./SubCategoryPage.css";
+import { useSelector } from "react-redux";
+import CartPopUp from "../CartPopUp/CartPopUp";
 
 const SubCategoryPage=()=>{
 
     const [foodItems,setFoodItems]=useState([]);
     const {subCategoryName}=useParams();
 
+    const cartItems=useSelector((store)=>store.cart.items);
+
+    useEffect(()=>{window.scroll(0,0)},[]);
     useEffect(()=>{fetchData();},[]);
 
     const fetchData=()=>{
@@ -28,6 +33,11 @@ const SubCategoryPage=()=>{
                     );
                 })}
             </div>
+            {(cartItems.length>0)?(
+                <CartPopUp/>
+            ):(
+                null
+            )}
         </div>
     );
 }

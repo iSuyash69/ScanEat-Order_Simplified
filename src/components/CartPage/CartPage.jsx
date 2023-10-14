@@ -4,8 +4,11 @@ import CartItemCard from "./CartItemCard/CartItemCard";
 import { Link } from "react-router-dom";
 import PlaceOrderPopUp from "./PlaceOrderPopUp/PlaceOrderPopUp";
 import emptyCartImg from "/assets/images/Empty cart illustration-fotor-bg-remover-2023101218357.png";
+import { useEffect } from "react";
 
 const CartPage=()=>{
+
+    useEffect(()=>{window.scroll(0,0)},[]);
 
     const cartItems=useSelector((store)=>store.cart.items);
     console.log(cartItems);
@@ -13,10 +16,10 @@ const CartPage=()=>{
     return(
             <div className="cart-page-main-container">
                 <div className="cart-page-title">
-                    <Link to={"/"}><i style={{fontSize:'20px'}} className="back-cdn" class="fa-solid fa-arrow-left"></i></Link>
+                    <Link to={"/"}><i style={{fontSize:'17px'}} className="back-cdn" class="fa-solid fa-arrow-left"></i></Link>
                     <div>
-                        <h3>Cart</h3>
-                        <i style={{color:'gray'}} class="fa-solid fa-cart-shopping"></i>
+                        <h3 style={{fontSize:'18px'}}>Cart</h3>
+                        <i style={{color:'gray',fontSize:'18px'}} class="fa-solid fa-cart-shopping"></i>
                     </div>
                 </div>
                 {(cartItems.length==0) ?(

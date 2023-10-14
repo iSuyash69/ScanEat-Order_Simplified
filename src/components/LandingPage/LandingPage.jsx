@@ -40,7 +40,7 @@ const LandingPage=()=>{
     console.log(foodItems);
     console.log(offersList);
     
-    if(offersList.length==0 && foodItems.length==0){
+    if(offersList.length==0 || foodItems.length==0){
         return <LandingPageShimmerUI/>
     }
 
@@ -49,7 +49,7 @@ const LandingPage=()=>{
             <Header/>
             <OffersSection offersList={offersList}/>
             <FoodTypeCardSection/>
-            <FoodItemsSection foodItems={foodItems}/>
+            <FoodItemsSection foodItems={foodItems} setFoodItems={setFoodItems}/>
         </div>
     );
 }

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {useSelector } from "react-redux";
 import CartPopUp from "../../CartPopUp/CartPopUp";
 import FoodItemCard from "./FoodItemCard/FoodItemCard";
+import VegOnlySection from "./VegOnlySection/VegOnlySection";
+import mockData from "/src/mockData.json";
 
-const FoodItemsSection=({foodItems})=>{
-    
+const FoodItemsSection=({foodItems,setFoodItems})=>{
+
     const [vegOnly,setVegOnly]=useState(false);
     const [showItems1,setShowItems1]=useState(true);
     const [showItems2,setShowItems2]=useState(false);
@@ -13,6 +15,12 @@ const FoodItemsSection=({foodItems})=>{
     const [showItems5,setShowItems5]=useState(false);
     const [showItems6,setShowItems6]=useState(false);
     const [showItems7,setShowItems7]=useState(false);
+
+    useEffect(()=>{
+        if(!vegOnly){
+            setFoodItems(mockData);
+        }
+    },[vegOnly]);
 
     const cartItems=useSelector((store)=>store.cart.items);
 
@@ -80,83 +88,89 @@ const FoodItemsSection=({foodItems})=>{
                     </div>
                 </div>
             </div>
-            <div className="title" onClick={handleClick1} >
-                <h2>Recommended {"("+recommendedItemsCard.length+")"}</h2>
-                <i className={`fa-solid fa-chevron-down ${showItems1 ? 'rotate':''}`}></i>
+            {(vegOnly)?(
+                <VegOnlySection foodItems={foodItems} setFoodItems={setFoodItems}/>
+            ):(
+                <div style={{display:'flex',flexDirection:'column',alignItems:'center',width:'100%'}}>
+                    <div className="title" onClick={handleClick1} >
+                        <h2>Recommended {"("+recommendedItemsCard.length+")"}</h2>
+                        <i className={`fa-solid fa-chevron-down ${showItems1 ? 'rotate':''}`}></i>
+                    </div>
+                {(showItems1==true)?(
+                    recommendedItemsCard
+                    ):(
+                        null
+                    )
+                }
+                <div className="hr"></div>
+                <div className="title" onClick={handleClick2} >
+                    <h2>Indian Main Course {"("+indianMainCourseItemsCard.length+")"}</h2>
+                    <i className={`fa-solid fa-chevron-down ${showItems2 ? 'rotate':''}`}></i>
+                </div>
+                {(showItems2==true)?(
+                    indianMainCourseItemsCard
+                    ):(
+                        null
+                    )
+                }
+                <div className="hr"></div>
+                <div className="title" onClick={handleClick3} >
+                    <h2>Non-Veg Starters {"("+nonVegItemsCard.length+")"}</h2>
+                    <i className={`fa-solid fa-chevron-down ${showItems3 ? 'rotate':''}`}></i>
+                </div>
+                {(showItems3==true)?(
+                    nonVegItemsCard
+                    ):(
+                        null
+                    )
+                }
+                <div className="hr"></div> 
+                <div className="title" onClick={handleClick4} >
+                    <h2>Veg Starters {"("+vegStarterItemsCard.length+")"}</h2>
+                    <i className={`fa-solid fa-chevron-down ${showItems4 ? 'rotate':''}`}></i>
+                </div>
+                {(showItems4==true)?(
+                    vegStarterItemsCard
+                    ):(
+                        null
+                    )
+                }
+                <div className="hr"></div>    
+                <div className="title" onClick={handleClick5} >
+                    <h2>Chinese Rice & Noodles {"("+chinieseItemsCard.length+")"}</h2>
+                    <i className={`fa-solid fa-chevron-down ${showItems5 ? 'rotate':''}`}></i>
+                </div>
+                {(showItems5==true)?(
+                    chinieseItemsCard
+                    ):(
+                        null
+                    )
+                }
+                <div className="hr"></div>
+                <div className="title" onClick={handleClick6} >
+                    <h2>Desserts {"("+desertsItemsCard.length+")"}</h2>
+                    <i className={`fa-solid fa-chevron-down ${showItems6 ? 'rotate':''}`}></i>
+                </div>
+                {(showItems6==true)?(
+                    desertsItemsCard
+                    ):(
+                        null
+                    )
+                }
+                <div className="hr"></div>
+                <div className="title" onClick={handleClick7} >
+                    <h2>Hot & Cold Beverages {"("+beveragesItemsCard.length+")"}</h2>
+                    <i className={`fa-solid fa-chevron-down ${showItems7 ? 'rotate':''}`}></i>
+                </div>
+                {(showItems7==true)?(
+                    beveragesItemsCard
+                    ):(
+                        null
+                    )
+                }
+                <div className="hr-max"></div>
             </div>
-            {(showItems1==true)?(
-                recommendedItemsCard
-                ):(
-                    null
-                )
-            }
-            <div className="hr"></div>
-            <div className="title" onClick={handleClick2} >
-                <h2>Indian Main Course {"("+indianMainCourseItemsCard.length+")"}</h2>
-                <i className={`fa-solid fa-chevron-down ${showItems2 ? 'rotate':''}`}></i>
-            </div>
-            {(showItems2==true)?(
-                indianMainCourseItemsCard
-                ):(
-                    null
-                )
-            }
-            <div className="hr"></div>
-            <div className="title" onClick={handleClick3} >
-                <h2>Non-Veg Starters {"("+nonVegItemsCard.length+")"}</h2>
-                <i className={`fa-solid fa-chevron-down ${showItems3 ? 'rotate':''}`}></i>
-            </div>
-            {(showItems3==true)?(
-                nonVegItemsCard
-                ):(
-                    null
-                )
-            }
-            <div className="hr"></div> 
-            <div className="title" onClick={handleClick4} >
-                <h2>Veg Starters {"("+vegStarterItemsCard.length+")"}</h2>
-                <i className={`fa-solid fa-chevron-down ${showItems4 ? 'rotate':''}`}></i>
-            </div>
-            {(showItems4==true)?(
-                vegStarterItemsCard
-                ):(
-                    null
-                )
-            }
-            <div className="hr"></div>    
-            <div className="title" onClick={handleClick5} >
-                <h2>Chinese Rice & Noodles {"("+chinieseItemsCard.length+")"}</h2>
-                <i className={`fa-solid fa-chevron-down ${showItems5 ? 'rotate':''}`}></i>
-            </div>
-            {(showItems5==true)?(
-                chinieseItemsCard
-                ):(
-                    null
-                )
-            }
-            <div className="hr"></div>
-            <div className="title" onClick={handleClick6} >
-                <h2>Desserts {"("+desertsItemsCard.length+")"}</h2>
-                <i className={`fa-solid fa-chevron-down ${showItems6 ? 'rotate':''}`}></i>
-            </div>
-            {(showItems6==true)?(
-                desertsItemsCard
-                ):(
-                    null
-                )
-            }
-            <div className="hr"></div>
-            <div className="title" onClick={handleClick7} >
-                <h2>Hot & Cold Beverages {"("+beveragesItemsCard.length+")"}</h2>
-                <i className={`fa-solid fa-chevron-down ${showItems7 ? 'rotate':''}`}></i>
-            </div>
-            {(showItems7==true)?(
-                beveragesItemsCard
-                ):(
-                    null
-                )
-            }
-            <div className="hr-max"></div>
+            )}
             {(cartItems.length>0)?(
                 <CartPopUp/>
             ):(

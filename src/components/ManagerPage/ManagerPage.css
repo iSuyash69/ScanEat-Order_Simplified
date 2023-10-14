@@ -1,0 +1,7 @@
+.manager-page-main-container{
+    background-color: white;
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    min-height:100vh;
+}

@@ -1,0 +1,113 @@
+import { useEffect, useState } from "react";
+import vegOnlyData from "/src/subCategoryMockData.json";
+import FoodItemCard from "../FoodItemCard/FoodItemCard";
+
+const VegOnlySection=({foodItems,setFoodItems})=>{
+
+    useEffect(()=>{setFoodItems(vegOnlyData)},[]);
+
+    const [showItems1,setShowItems1]=useState(true);
+    const [showItems2,setShowItems2]=useState(false);
+    const [showItems3,setShowItems3]=useState(false);
+    const [showItems4,setShowItems4]=useState(false);
+    const [showItems5,setShowItems5]=useState(false);
+
+    const recommendedItemsCard = foodItems.filter(item => item.Recommended === 1).map((card, index) => (
+        <FoodItemCard key={index} card={card} />
+        ));
+    
+        const indianMainCourseItemsCard = foodItems.filter(item => item.Maincategory === "Indian Main Course").map((card, index) => (
+        <FoodItemCard key={index} card={card} />
+        ));
+    
+        const vegStarterItemsCard = foodItems.filter(item => item.Maincategory === "Veg Starter").map((card, index) => (
+            <FoodItemCard key={index} card={card} />
+            ));
+
+        const desertsItemsCard = foodItems.filter(item => item.Maincategory === "Dessert").map((card, index) => (
+            <FoodItemCard key={index} card={card} />
+            ));
+    
+    
+        const chinieseItemsCard = foodItems.filter(item => item.Maincategory === "Chiniese Rice & Noodles").map((card, index) => (
+        <FoodItemCard key={card.item_id} card={card} />
+        ));
+
+        const handleClick1=()=>{
+            setShowItems1(!showItems1);
+        }
+        const handleClick2=()=>{
+            setShowItems2(!showItems2);
+        }
+        const handleClick3=()=>{
+            setShowItems3(!showItems3);
+        }
+        const handleClick4=()=>{
+            setShowItems4(!showItems4);
+        }
+        const handleClick5=()=>{
+            setShowItems5(!showItems5);
+        }
+
+    return(
+        <div style={{display:'flex',flexDirection:'column',alignItems:'center',width:'100%'}}>
+            <div className="title" onClick={handleClick1} >
+                <h2>Recommended {"("+recommendedItemsCard.length+")"}</h2>
+                <i className={`fa-solid fa-chevron-down ${showItems1 ? 'rotate':''}`}></i>
+            </div>
+            {(showItems1==true)?(
+                recommendedItemsCard
+                ):(
+                    null
+                )
+            }
+            <div className="hr"></div>
+            <div className="title" onClick={handleClick2} >
+                <h2>Indian Main Course {"("+indianMainCourseItemsCard.length+")"}</h2>
+                <i className={`fa-solid fa-chevron-down ${showItems2 ? 'rotate':''}`}></i>
+            </div>
+            {(showItems2==true)?(
+                indianMainCourseItemsCard
+                ):(
+                    null
+                )
+            }
+            <div className="hr"></div>
+            <div className="title" onClick={handleClick3} >
+                <h2>Veg Starters {"("+vegStarterItemsCard.length+")"}</h2>
+                <i className={`fa-solid fa-chevron-down ${showItems3 ? 'rotate':''}`}></i>
+            </div>
+            {(showItems3==true)?(
+                nonVegItemsCard
+                ):(
+                    null
+                )
+            }
+            <div className="hr"></div> 
+            <div className="title" onClick={handleClick4} >
+                <h2>Desserts {"("+desertsItemsCard.length+")"}</h2>
+                <i className={`fa-solid fa-chevron-down ${showItems4 ? 'rotate':''}`}></i>
+            </div>
+            {(showItems4==true)?(
+                vegStarterItemsCard
+                ):(
+                    null
+                )
+            }
+            <div className="hr"></div>    
+            <div className="title" onClick={handleClick5} >
+                <h2>Chinese Rice & Noodles {"("+chinieseItemsCard.length+")"}</h2>
+                <i className={`fa-solid fa-chevron-down ${showItems5 ? 'rotate':''}`}></i>
+            </div>
+            {(showItems5==true)?(
+                chinieseItemsCard
+                ):(
+                    null
+                )
+            }
+            <div className="hr-max"></div>
+        </div>
+    );
+}
+
+export default VegOnlySection;
