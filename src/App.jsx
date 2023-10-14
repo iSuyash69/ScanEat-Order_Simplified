@@ -10,7 +10,7 @@ import SubCategoryPage from "./components/SubCategoryPage/SubCategoryPage";
 import { lazy } from "react";
 
 
-const ManagerPage=lazy(()=>import("./components/ManagerPage/ManagerPage.jsx"));
+const ManagerPageLogin=lazy(()=>import("./components/ManagerPage/ManagerPageLogin/ManagerPageLogin.jsx"));
 
 const AppLayout=()=>{
     return(
@@ -42,8 +42,8 @@ const appRouter=createBrowserRouter([
             },
             {
                 path:"/Manager",
-                element:<ManagerPage/>
-            }
+                element:<ManagerPageLogin/>
+            },
         ],
         errorElement:<ErrorPage/>
     }

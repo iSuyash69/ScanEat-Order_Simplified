@@ -1,7 +1,102 @@
-.manager-page-main-container{
+.manager-login-page{
     background-color: white;
     position: relative;
     z-index: 1000;
     width: 100%;
-    min-height:100vh;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-container {
+    background: #ffffff;
+    border: 1px solid #e1e1e1;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+.login-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.login-form input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.login-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+/*  ------------------manager-page styling goes here------------------- */
+
+.manager-page-main-container{
+    background-color: white;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.manager-card-main-container{
+    height: 33.33vh;   
+}
+.manager-card-title{
+    width: 100%;
+    background-color: #E6E7E9;
+    height: 28px;
+}
+.manager-card-container{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    align-items: center;
+    /* background-color: #007bff; */
+    padding-left: 20px;
+    gap: 15px;
+    height: calc(33.33vh - 28px);
+}
+
+/* ------------pending-item-card----------- */
+
+.pending-item-card{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:beige;
+    border-radius: 10px;
+    width: 200px;
+    height: 180px;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    /* margin-bottom: 5px; */    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+.pending-item-card:hover{
+    transform: scale(0.9);
+}
+.pending-item-card h1{
+    font-size: 25px;
+}
+.pending-item-card h2{
+    font-size: 20px;
+}
+.pending-item-card h3{
+    font-size: 15px;
 }
