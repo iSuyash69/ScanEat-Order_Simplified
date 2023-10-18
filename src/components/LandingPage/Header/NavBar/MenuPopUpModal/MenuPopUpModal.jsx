@@ -29,6 +29,10 @@ const MenuPopUpModal=({openMenuPopUp,setOpenMenuPopUp})=>{
         navigate("/cart");
         setOpenMenuPopUp(false);
     }
+    const navigateStatus=()=>{
+        navigate("/OrderedItemsStatus");
+        setOpenMenuPopUp(false);
+    }
 
     return ReactDOM.createPortal(
         <div className={`menu-popup-modal-main-container`}>
@@ -37,7 +41,7 @@ const MenuPopUpModal=({openMenuPopUp,setOpenMenuPopUp})=>{
                 <div>
                     <h2 onClick={navigateHome}>Home</h2>
                     <h2 onClick={navigateCart}>Cart</h2>
-                    <h2>Food Catagories</h2>
+                    <h2 onClick={navigateStatus}>Order Status</h2>
                     <h2>Recommended items</h2>
                     <h2>About Us</h2>
                 </div>  

@@ -1,21 +1,22 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
 import PendingCard from "./PendingCard/PendingCard";
+import managerData from "/managerData.json";
 
 const ManagerPage=()=>{
 
-    const [Pending,setPending]=useState([]);
+    const [orders,setOrders]=useState([]);
 
     const fetchData = () => {
-        axios.get('http://localhost:8080/posts')
-          .then((response) => {
-            setPending(response.data.data);
-            console.log(response.data.data);
+        // axios.get('http://192.168.1.136:8080/managers')
+        //   .then((response) => { 
+        //     console.log(response.data);
+        //   })
+        //   .catch(()=>{
+        //     console.log("Request failed");
+        //   });
 
-          })
-          .catch(()=>{
-            console.log("Request failed");
-          });
+            setOrders(managerData);
       };
 
     useEffect(()=>{
@@ -31,7 +32,7 @@ const ManagerPage=()=>{
             <div className="manager-card-main-container">
                 <h3 className="manager-card-title">Pending</h3>
                 <div className="manager-card-container">
-                    {Pending.map((card,index)=>{
+                    {orders.map((card,index)=>{
                         return <PendingCard card={card} key={index}/>
                     })}
                 </div>

@@ -8,6 +8,7 @@ import reduxStore from "./components/utils/ReduxStore/reduxStore";
 import CartPage from "./components/CartPage/CartPage";
 import SubCategoryPage from "./components/SubCategoryPage/SubCategoryPage";
 import { lazy } from "react";
+import OrderedItemsPage from "./components/OrderedItemsPage/OrderedItemsPage";
 
 
 const ManagerPageLogin=lazy(()=>import("./components/ManagerPage/ManagerPageLogin/ManagerPageLogin.jsx"));
@@ -44,6 +45,10 @@ const appRouter=createBrowserRouter([
                 path:"/Manager",
                 element:<ManagerPageLogin/>
             },
+            {
+                path:"/orderedItemsStatus",
+                element:<OrderedItemsPage/>
+            }
         ],
         errorElement:<ErrorPage/>
     }

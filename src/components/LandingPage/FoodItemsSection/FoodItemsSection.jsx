@@ -4,6 +4,7 @@ import CartPopUp from "../../CartPopUp/CartPopUp";
 import FoodItemCard from "./FoodItemCard/FoodItemCard";
 import VegOnlySection from "./VegOnlySection/VegOnlySection";
 import mockData from "/src/mockData.json";
+import axios from "axios";
 
 const FoodItemsSection=({foodItems,setFoodItems})=>{
 
@@ -18,6 +19,14 @@ const FoodItemsSection=({foodItems,setFoodItems})=>{
 
     useEffect(()=>{
         if(!vegOnly){
+            // axios.get("http://192.168.1.136:8080/home/1")
+            // .then((response)=>{
+            //     console.log(response.data);
+            //     setFoodItems(response.data);
+            // })
+            // .catch(()=>{
+            //     console.log("foodItems Get request failed");
+            // });
             setFoodItems(mockData);
         }
     },[vegOnly]);

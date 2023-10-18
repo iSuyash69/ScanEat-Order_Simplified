@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
 import vegOnlyData from "/src/subCategoryMockData.json";
 import FoodItemCard from "../FoodItemCard/FoodItemCard";
+import axios from "axios";
 
 const VegOnlySection=({foodItems,setFoodItems})=>{
 
-    useEffect(()=>{setFoodItems(vegOnlyData)},[]);
+    useEffect(()=>{
+        axios.get("http://192.168.1.136:8080/home/1/veg")
+        .then((response)=>{
+            console.log(response.data);
+            setFoodItems(response.data);
+        })
+        .catch(()=>{
+            console.log("foodItems Get request failed");
+        });
+    },[]);
 
     const [showItems1,setShowItems1]=useState(true);
     const [showItems2,setShowItems2]=useState(false);

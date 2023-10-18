@@ -43,16 +43,23 @@ const FoodItemPopUpModal=({card,foodItemPopUp,setFoodItemPopUp,quantity,handleCl
                         <h3>{card.name}</h3>
                         <p>₹{card.price}</p>
                     </div>
-                    <button onClick={()=>handleClickEvent(card)}>{quantity>0 ?(
-                    <p className="quantity" onClick={(e)=>{e.stopPropagation();}}>
-                    <span onClick={() => {dispatch(removeItem(card)); }}>- </span>
-                    <span onClick={(e)=>{e.stopPropagation();}}>{quantity}</span>
-                    <span onClick={() => {dispatch(addItem(card)); }}> +</span>
-                    </p>
-                ):(
-                'ADD'
-                )}
-                </button>
+                    {(card.Availability)?(
+                        <div>
+                            <button onClick={()=>handleClickEvent(card)}>{quantity>0 ?(
+                            <p className="quantity" onClick={(e)=>{e.stopPropagation();}}>
+                                <span onClick={() => {dispatch(removeItem(card)); }}>- </span>
+                                <span onClick={(e)=>{e.stopPropagation();}}>{quantity}</span>
+                                <span onClick={() => {dispatch(addItem(card)); }}> +</span>
+                            </p>
+
+                        ):(
+                        'ADD'
+                        )}
+                            </button>
+                        </div>
+                    ):(
+                        <h4 style={{position:'absolute',right:'30',marginTop:'40px',color:'red'}}>Item currently unavailable</h4>
+                    )}
                 </div>
                 <div className="food-item-popup-modal-sub-container3">
                     <h4>{card.description}</h4>

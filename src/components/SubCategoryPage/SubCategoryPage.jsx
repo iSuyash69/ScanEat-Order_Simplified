@@ -5,6 +5,7 @@ import FoodItemCard from "../LandingPage/FoodItemsSection/FoodItemCard/FoodItemC
 import "./SubCategoryPage.css";
 import { useSelector } from "react-redux";
 import CartPopUp from "../CartPopUp/CartPopUp";
+import axios from "axios";
 
 const SubCategoryPage=()=>{
 
@@ -13,11 +14,19 @@ const SubCategoryPage=()=>{
 
     const cartItems=useSelector((store)=>store.cart.items);
 
+    // console.log(subCategoryName);
     useEffect(()=>{window.scroll(0,0)},[]);
     useEffect(()=>{fetchData();},[]);
 
     const fetchData=()=>{
-        setFoodItems(subCategoryMockData);
+        axios.get(`http://192.168.1.136:8080/home/1/${subCategoryName}`)
+        .then((response)=>{
+            console.log(response.data);
+            setFoodItems(response.data);
+        })
+        .catch(()=>{
+            console.log("foodItems Get request failed");
+        });
     }
 
     return(
@@ -27,7 +36,7 @@ const SubCategoryPage=()=>{
                 <h3>This is {subCategoryName} category page</h3>
             </div>
             <div className="sub-category-sub-container">
-                {subCategoryMockData.map((card,index)=>{
+                {foodItems.map((card,index)=>{
                     return (
                         <FoodItemCard card={card} key={index}/>
                     );

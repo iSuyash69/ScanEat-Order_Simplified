@@ -35,6 +35,8 @@ const FoodItemCard=({card})=>{
                 <h4>{card.description}</h4>
             </div>
             <div id="two">
+                {(card.Availability)?(
+                    <div>
                 <img onClick={()=>{setFoodItemPopUp(true)}} src={card.src} alt="not loaded"></img>
                 <button onClick={()=>handleClick(card)}>{quantity>0 ?(
                     <p className="quantity" onClick={(e)=>{e.stopPropagation();}}>
@@ -46,6 +48,12 @@ const FoodItemCard=({card})=>{
                 'ADD'
                 )}
                 </button>
+                </div>
+                ):(
+                    <div>
+                        <img onClick={()=>{setFoodItemPopUp(true)}} style={{filter:'grayscale(100%)'}} src={card.src} alt="not loaded"></img>
+                    </div>
+                )}
             </div>
             <FoodItemPopUpModal card={card} foodItemPopUp={foodItemPopUp} setFoodItemPopUp={setFoodItemPopUp} quantity={quantity} handleClick={()=>handleClick(card)}/>
             <hr></hr>
