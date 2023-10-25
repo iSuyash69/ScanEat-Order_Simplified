@@ -9,9 +9,11 @@ import CartPage from "./components/CartPage/CartPage";
 import SubCategoryPage from "./components/SubCategoryPage/SubCategoryPage";
 import { lazy } from "react";
 import OrderedItemsPage from "./components/OrderedItemsPage/OrderedItemsPage";
-
+import SearchPage from "./components/SearchPage/SearchPage";
 
 const ManagerPageLogin=lazy(()=>import("./components/ManagerPage/ManagerPageLogin/ManagerPageLogin.jsx"));
+const ManagerDashboard=lazy(()=>import("./components/ManagerPage/ManagerDashboard/ManagerDashboard.jsx"))
+const ChefPage=lazy(()=>import("./components/ChefPage/ChefPage"))
 
 const AppLayout=()=>{
     return(
@@ -30,8 +32,12 @@ const appRouter=createBrowserRouter([
         element:<AppLayout/>,
         children:[
             {
-                path:"/",
+                path:"/:table_id",
                 element:<LandingPage/>
+            },
+            {
+                path:"/search",
+                element:<SearchPage/>
             },
             {
                 path:"/cart",
@@ -46,8 +52,15 @@ const appRouter=createBrowserRouter([
                 element:<ManagerPageLogin/>
             },
             {
+                path:"/Manager/dashboard",
+                element:<ManagerDashboard/>
+            },
+            {
                 path:"/orderedItemsStatus",
                 element:<OrderedItemsPage/>
+            },{
+                path:"/Chef",
+                element:<ChefPage/>
             }
         ],
         errorElement:<ErrorPage/>

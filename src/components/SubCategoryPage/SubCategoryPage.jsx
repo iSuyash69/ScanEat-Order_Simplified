@@ -12,6 +12,7 @@ const SubCategoryPage=()=>{
     const [foodItems,setFoodItems]=useState([]);
     const {subCategoryName}=useParams();
 
+    const id=useSelector((store)=>store.table_id.table_id);
     const cartItems=useSelector((store)=>store.cart.items);
 
     // console.log(subCategoryName);
@@ -19,7 +20,7 @@ const SubCategoryPage=()=>{
     useEffect(()=>{fetchData();},[]);
 
     const fetchData=()=>{
-        axios.get(`http://192.168.1.136:8080/home/1/${subCategoryName}`)
+        axios.get(`http://192.168.178.196:8080/home/${id}/${subCategoryName}`)
         .then((response)=>{
             console.log(response.data);
             setFoodItems(response.data);
@@ -27,13 +28,14 @@ const SubCategoryPage=()=>{
         .catch(()=>{
             console.log("foodItems Get request failed");
         });
+        // setFoodItems(subCategoryMockData);
     }
 
     return(
         <div className="sub-category-main-container">
             <div className="sub-category-title">
-                <Link to={"/"}><i style={{fontSize:'20px'}} className="back-cdn" class="fa-solid fa-arrow-left"></i></Link>
-                <h3>This is {subCategoryName} category page</h3>
+                <Link style={{color:'black'}} to={`/${id}`}><i style={{fontSize:'18px'}} className="back-cdn" class="fa-solid fa-arrow-left"></i></Link>
+                <h3 style={{fontSize:'17px'}}>This is {subCategoryName} category page</h3>
             </div>
             <div className="sub-category-sub-container">
                 {foodItems.map((card,index)=>{

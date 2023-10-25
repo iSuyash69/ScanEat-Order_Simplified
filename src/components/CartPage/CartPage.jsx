@@ -11,6 +11,7 @@ const CartPage=()=>{
 
     useEffect(()=>{window.scroll(0,0)},[]);
 
+    const id=useSelector((store)=>store.table_id.table_id);
     const {transcript,resetTranscript}=useSpeechRecognition();
     const cartItems=useSelector((store)=>store.cart.items);
     const [listening,setListening]=useState(false);
@@ -45,7 +46,7 @@ const CartPage=()=>{
     return(
             <div className="cart-page-main-container">
                 <div className="cart-page-title">
-                    <Link to={"/"}><i style={{fontSize:'17px'}} className="back-cdn" class="fa-solid fa-arrow-left"></i></Link>
+                    <Link to={`/${id}`}><i style={{fontSize:'17px'}} className="back-cdn" class="fa-solid fa-arrow-left"></i></Link>
                     <div>
                         <h3 style={{fontSize:'18px'}}>Cart</h3>
                         <i style={{color:'gray',fontSize:'18px'}} class="fa-solid fa-cart-shopping"></i>

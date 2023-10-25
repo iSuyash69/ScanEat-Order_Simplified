@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const OrderedItemsPopUp=()=>{
+const OrderedItemsPopUp=({allItems})=>{
 
-    const allItems=useSelector((store)=>{return(store.allItems.items);});
     const cartItems=useSelector((store)=>{return(store.cart.items);});
 
     const [showPopUp,setShowPopUp]=useState(false);
 
     useEffect(()=>{
-        if(allItems.length!=0 && cartItems.length==0){
+        if(allItems.length!==0 && cartItems.length==0){
             setShowPopUp(true);
         }
         else{

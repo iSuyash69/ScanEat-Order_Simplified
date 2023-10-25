@@ -1,10 +1,40 @@
 import { useSelector } from "react-redux";
 import "./OrderedItemsPage.css";
 import OrderedItemCard from "./OrderedItemCard/OrderedItemCard";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import allItemsData from "/src/orderedData.json";
+import OrderedItemsPopUp from "./OrderedItemsPopUp/OrderedItemsPopUp";
+import BillPopUp from "./BillPopUp/BillPopUp";
 
 const OrderedItemsPage=()=>{
 
-    const allItems=useSelector((store)=>{return(store.allItems.items);});
+    useEffect(()=>{window.scroll(0,0)},[]);
+
+    const id=useSelector((store)=>store.table_id.table_id);
+    const [allItems,setAllItems]=useState([]);
+
+    const fetchData=()=>{
+        axios.get(`http://192.168.178.196:8080/home/${id}/abc/cart`)
+        .then((response)=>{
+            console.log(response.data);
+            setAllItems(response.data);
+        })
+        .catch(()=>{
+            console.log("allItems get request failed");
+        })
+        // setAllItems(allItemsData);
+    };
+
+    useEffect(()=>{
+        const fetchDataInterval=setInterval(()=>{
+            fetchData();
+        },2500);
+        fetchData();
+        return()=>clearInterval(fetchDataInterval);
+    },[]);
+
+    // const allItems=useSelector((store)=>{return(store.allItems.items);});
     console.log(allItems);
 
     if(allItems.length==0){
@@ -12,30 +42,59 @@ const OrderedItemsPage=()=>{
 
     }
 
+    const pendingData=allItems.filter((item)=>item.status_id==1);
+    const preparingData=allItems.filter((item)=>item.status_id==2);
+    const deliveredData=allItems.filter((item)=>item.status_id==3);
+
+    console.log(pendingData);
+    console.log(preparingData);
+    console.log(deliveredData);
+
+    <OrderedItemsPopUp allItems={allItems}/>
+
     return(
         <div className="ordered-items-main-container">
             <div className="ordered-items-sub-container">
                 <h3 className="ordered-items-sub-container-title">Ordered</h3>
-                <div className="ordered-item-card-container">
-                    {allItems.map((order)=>{
-                       return order.item.map((card,index)=>{
-                            return <OrderedItemCard card={card} time={order.time} key={index}/>
-                        });
-                    })}
+                <div style={{ justifyContent: 'center' }} className="ordered-item-card-container">
+                {pendingData.map((card, index) => (
+                    <OrderedItemCard card={card} key={index} />
+                    ))
+                }
+                {allItems.filter((item) => item.status_id === 1).length === 0 && (
+                    <h4 style={{fontWeight:'400',fontSize:'15px',textAlign:'center'}}>No new items ordered</h4>
+                )}
                 </div>
             </div>
             <div className="ordered-items-sub-container">
                 <h3 className="ordered-items-sub-container-title">Preparing</h3>
-                <div style={{justifyContent:'center'}} className="ordered-item-card-container">
+                <div style={{ justifyContent: 'center' }} className="ordered-item-card-container">
+                {preparingData.map((card, index) => (
+                    <OrderedItemCard card={card} key={index} />
+                    ))
+                }
+                {allItems.filter((item) => item.status_id === 2).length === 0 && (
                     <h4 style={{fontWeight:'400',fontSize:'15px',textAlign:'center'}}>No items in the preparing</h4>
+                )}
                 </div>
             </div>
             <div className="ordered-items-sub-container">
                 <h3 className="ordered-items-sub-container-title">Delivered</h3>
-                <div style={{justifyContent:'center'}} className="ordered-item-card-container">
-                    <h4 style={{fontWeight:'400',fontSize:'15px',textAlign:'center'}}>No items delivered yet</h4> 
+                <div style={{ justifyContent: 'center' }} className="ordered-item-card-container">
+                {deliveredData.map((card, index) => (
+                    <OrderedItemCard card={card} key={index} />
+                    ))
+                }
+                {allItems.filter((item) => item.status_id === 3).length === 0 && (
+                    <h4 style={{fontWeight:'400',fontSize:'15px',textAlign:'center'}}>Items will be delivered soon</h4>
+                )}
                 </div>
             </div>
+            {(pendingData.length === 0 && preparingData.length == 0 && deliveredData.length !== 0)?(
+                <BillPopUp/>
+            ):(
+                null
+            )}
         </div>
     )
 }

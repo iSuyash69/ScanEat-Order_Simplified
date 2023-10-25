@@ -8,6 +8,8 @@ import axios from "axios";
 
 const FoodItemsSection=({foodItems,setFoodItems})=>{
 
+    const id=useSelector((store)=>store.table_id.table_id);
+
     const [vegOnly,setVegOnly]=useState(false);
     const [showItems1,setShowItems1]=useState(true);
     const [showItems2,setShowItems2]=useState(false);
@@ -16,24 +18,29 @@ const FoodItemsSection=({foodItems,setFoodItems})=>{
     const [showItems5,setShowItems5]=useState(false);
     const [showItems6,setShowItems6]=useState(false);
     const [showItems7,setShowItems7]=useState(false);
+    const [showItems8,setShowItems8]=useState(false);
 
     useEffect(()=>{
         if(!vegOnly){
-            // axios.get("http://192.168.1.136:8080/home/1")
-            // .then((response)=>{
-            //     console.log(response.data);
-            //     setFoodItems(response.data);
-            // })
-            // .catch(()=>{
-            //     console.log("foodItems Get request failed");
-            // });
-            setFoodItems(mockData);
+            axios.get(`http://192.168.178.196:8080/home/${id}`)
+            .then((response)=>{
+                console.log(response.data);
+                setFoodItems(response.data);
+            })
+            .catch(()=>{
+                console.log("foodItems Get request failed");
+            });
+            // setFoodItems(mockData);
         }
     },[vegOnly]);
 
     const cartItems=useSelector((store)=>store.cart.items);
 
     const recommendedItemsCard = foodItems.filter(item => item.Recommended === 1).map((card, index) => (
+    <FoodItemCard key={index} card={card} />
+    ));
+
+    const rotiItemsCard = foodItems.filter(item => item.Maincategory === 'Roti').map((card, index) => (
     <FoodItemCard key={index} card={card} />
     ));
 
@@ -86,6 +93,9 @@ const FoodItemsSection=({foodItems,setFoodItems})=>{
     const handleClick7=()=>{
         setShowItems7(!showItems7);
     }
+    const handleClick8=()=>{
+        setShowItems8(!showItems8);
+    }
 
     return(
         <div className="restaurants-menu-card-container">
@@ -113,65 +123,76 @@ const FoodItemsSection=({foodItems,setFoodItems})=>{
                 }
                 <div className="hr"></div>
                 <div className="title" onClick={handleClick2} >
-                    <h2>Indian Main Course {"("+indianMainCourseItemsCard.length+")"}</h2>
+                    <h2>Roti & Naan {"("+rotiItemsCard.length+")"}</h2>
                     <i className={`fa-solid fa-chevron-down ${showItems2 ? 'rotate':''}`}></i>
                 </div>
                 {(showItems2==true)?(
-                    indianMainCourseItemsCard
+                    rotiItemsCard
                     ):(
                         null
                     )
                 }
                 <div className="hr"></div>
                 <div className="title" onClick={handleClick3} >
-                    <h2>Non-Veg Starters {"("+nonVegItemsCard.length+")"}</h2>
+                    <h2>Indian Main Course {"("+indianMainCourseItemsCard.length+")"}</h2>
                     <i className={`fa-solid fa-chevron-down ${showItems3 ? 'rotate':''}`}></i>
                 </div>
                 {(showItems3==true)?(
+                    indianMainCourseItemsCard
+                    ):(
+                        null
+                    )
+                }
+                <div className="hr"></div>
+                <div className="title" onClick={handleClick4} >
+                    <h2>Non-Veg Starters {"("+nonVegItemsCard.length+")"}</h2>
+                    <i className={`fa-solid fa-chevron-down ${showItems4 ? 'rotate':''}`}></i>
+                </div>
+                {(showItems4==true)?(
                     nonVegItemsCard
                     ):(
                         null
                     )
                 }
                 <div className="hr"></div> 
-                <div className="title" onClick={handleClick4} >
+                <div className="title" onClick={handleClick5} >
                     <h2>Veg Starters {"("+vegStarterItemsCard.length+")"}</h2>
-                    <i className={`fa-solid fa-chevron-down ${showItems4 ? 'rotate':''}`}></i>
+                    <i className={`fa-solid fa-chevron-down ${showItems5 ? 'rotate':''}`}></i>
                 </div>
-                {(showItems4==true)?(
+                {(showItems5==true)?(
                     vegStarterItemsCard
                     ):(
                         null
                     )
                 }
                 <div className="hr"></div>    
-                <div className="title" onClick={handleClick5} >
+                <div className="title" onClick={handleClick6} >
                     <h2>Chinese Rice & Noodles {"("+chinieseItemsCard.length+")"}</h2>
-                    <i className={`fa-solid fa-chevron-down ${showItems5 ? 'rotate':''}`}></i>
+                    <i className={`fa-solid fa-chevron-down ${showItems6 ? 'rotate':''}`}></i>
                 </div>
-                {(showItems5==true)?(
+                {(showItems6==true)?(
                     chinieseItemsCard
                     ):(
                         null
                     )
                 }
                 <div className="hr"></div>
-                <div className="title" onClick={handleClick6} >
+                <div className="title" onClick={handleClick7} >
                     <h2>Desserts {"("+desertsItemsCard.length+")"}</h2>
-                    <i className={`fa-solid fa-chevron-down ${showItems6 ? 'rotate':''}`}></i>
+                    <i className={`fa-solid fa-chevron-down ${showItems7 ? 'rotate':''}`}></i>
                 </div>
-                {(showItems6==true)?(
+                {(showItems7==true)?(
                     desertsItemsCard
                     ):(
                         null
                     )
                 }
                 <div className="hr"></div>
-                <div className="title" onClick={handleClick7} >
+                <div className="title" onClick={handleClick8} >
                     <h2>Hot & Cold Beverages {"("+beveragesItemsCard.length+")"}</h2>
-                    <i className={`fa-solid fa-chevron-down ${showItems7 ? 'rotate':''}`}></i>
+                    <i className={`fa-solid fa-chevron-down ${showItems8 ? 'rotate':''}`}></i>
                 </div>
-                {(showItems7==true)?(
+                {(showItems8==true)?(
                     beveragesItemsCard
                     ):(
                         null

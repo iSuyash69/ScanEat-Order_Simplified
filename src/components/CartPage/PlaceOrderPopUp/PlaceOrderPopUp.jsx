@@ -5,13 +5,17 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { addItem } from "../../utils/ReduxStore/allItemsSlice/allItemsSlice";
+import { useState } from "react";
 
 const PlaceOrderPopUp=({special_instruction})=>{
 
+    const id=useSelector((store)=>store.table_id.table_id);
     const navigate =useNavigate();
     const dispatch=useDispatch();
     const cartItems=useSelector((store)=>{return(store.cart.items);});
     const totalCost=useSelector((store)=>{ return (store.cart.totalCost);});
+
+    const [loading,setLoading]=useState(null);
 
     console.log(totalCost);
     console.log(special_instruction);
@@ -24,33 +28,67 @@ const PlaceOrderPopUp=({special_instruction})=>{
         })),
         special_instruction:special_instruction
     };
-    
+
     const postData=(event)=>{
-        console.log(selectedData);
-        dispatch(addItem({
-            item:cartItems,
-            time:new Date().toLocaleTimeString(),
-        }));
 
-        Swal.fire({
-            icon:'success',
-            html: '<span style="font-weight: bold;">Order Placed Successfully</span>',
-            showConfirmButton:false,
-            timer:3000,
-            didDestroy:function(){
-                dispatch(emptyCart());
-                navigate("/");
+        setLoading(
+            Swal.fire({
+                title: "Loading...",
+                text: "Please wait.",
+                icon: "info",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            })
+        );
+
+        event.preventDefault();
+        axios.post(`http://192.168.178.196:8080/home/${id}/abc/placeOrder`,selectedData)
+        .then((response)=>{
+            console.log(response.data);
+            // dispatch(addItem({
+            //     item:cartItems,
+            //     time:new Date().toLocaleTimeString(),
+            // }));
+            Swal.fire({
+                icon:'success',
+                html: '<span style="font-weight: bold;">Order Placed Successfully</span>',
+                showConfirmButton:false,
+                timer:3000,
+                didDestroy:function(){
+                    dispatch(emptyCart());
+                    navigate(`/${id}`);
+                }
+            });
+        })
+        .catch(()=>{
+            console.log("post request failed");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong! Please try again.",
+              });
+        })
+        .finally(()=>{
+            if(loading){
+                loading.close();
             }
-        });
+        })
 
-        // event.preventDefault();
-        // axios.post("http://192.168.1.136:8080/home/1/placeOrder",selectedData)
-        // .then((response)=>{
-        //     console.log(response.data);
-        // })
-        // .catch(()=>{
-        //     console.log("post request failed")
-        // })
+        // dispatch(addItem({
+        //              item:fromManagerData,
+        //              time:new Date().toLocaleTimeString(),
+        //         }));
+            //         Swal.fire({
+            //     icon:'success',
+            //     html: '<span style="font-weight: bold;">Order Placed Successfully</span>',
+            //     showConfirmButton:false,
+            //     timer:3000,
+            //     didDestroy:function(){
+            //         dispatch(emptyCart());
+            //         navigate("/");
+            //     }
+            // });
     }
 
     return(

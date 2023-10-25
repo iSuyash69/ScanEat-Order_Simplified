@@ -2,9 +2,11 @@ import ReactDOM from "react-dom";
 import { useEffect} from "react";
 import "./MenuPopUpModal.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MenuPopUpModal=({openMenuPopUp,setOpenMenuPopUp})=>{
   
+    const id=useSelector((store)=>store.table_id.table_id)
     useEffect(()=>{overFlow();},[openMenuPopUp]);
     const navigate=useNavigate();
 
@@ -22,7 +24,7 @@ const MenuPopUpModal=({openMenuPopUp,setOpenMenuPopUp})=>{
     }
 
     const navigateHome=()=>{
-        navigate("/");
+        navigate(`/${id}`);
         setOpenMenuPopUp(false);
     }
     const navigateCart=()=>{
